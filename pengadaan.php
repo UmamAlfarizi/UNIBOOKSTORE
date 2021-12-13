@@ -4,7 +4,7 @@
 require_once('connection.php');
 
 // mengambil data
-$query = "SELECT * FROM tb_buku JOIN tb_kategori ON tb_buku.id_kategori = tb_kategori.id_kategori JOIN tb_penerbit ON tb_buku.id_penerbit = tb_penerbit.id_penerbit";
+$query = "SELECT * FROM tb_buku JOIN tb_kategori ON tb_buku.id_kategori = tb_kategori.id_kategori JOIN tb_penerbit ON tb_buku.id_penerbit = tb_penerbit.id_penerbit ORDER BY stok_buku ASC LIMIT 1";
 $result = mysqli_query($mysqli, $query);
 
 
@@ -41,10 +41,10 @@ $result = mysqli_query($mysqli, $query);
                   <a class="nav-link" aria-current="page" href="index.php">Home</a>
                </li>
                <li class="nav-item">
-                  <a class="nav-link active" href="admin.php">Admin</a>
+                  <a class="nav-link" href="admin.php">Admin</a>
                </li>
                <li class="nav-item">
-                  <a class="nav-link" href="pengadaan.php">Pengadaan</a>
+                  <a class="nav-link active" href="pengadaan.php">Pengadaan</a>
                </li>
             </ul>
          </div>
@@ -56,25 +56,18 @@ $result = mysqli_query($mysqli, $query);
    <section id="main" style="margin-top: 6rem;">
       <div class="container">
          <div class="row mb-4">
-            <h2 class="text-center">Data Buku</h2>
-         </div>
-         <div class="row mb-4">
-            <div class="col p-0">
-               <a href="tambah_buku.php" class="btn btn-success"><i class="bi bi-file-plus"></i> Tambah Data</a>
-            </div>
+            <h2 class="text-center">Kebutuhan Buku</h2>
+            <p class="text-center text-muted">Laporan Buku Yang Harus Segera Dibeli</p>
          </div>
          <div class="row">
-            <div class="col-12 shadow-sm">
+            <div class="col-12 shadow">
                <table class="table table-hover table-responsive">
                   <thead>
                      <tr>
                         <th scope="col">#</th>
-                        <th scope="col">Kategori</th>
                         <th scope="col">Nama Buku</th>
-                        <th scope="col">Harga (Rp)</th>
                         <th scope="col">Stok</th>
                         <th scope="col">Penerbit</th>
-                        <th scope="col">Aksi</th>
                      </tr>
                   </thead>
                   <tbody>
@@ -90,25 +83,13 @@ $result = mysqli_query($mysqli, $query);
                      ?>
                      <tr>
                         <th scope="row"><?= $i++; ?></th>
-                        <td><?= ucwords($kategori); ?></td>
                         <td><?= ucwords($nama); ?></td>
-                        <td><?= number_format($harga); ?></td>
                         <td><?= $stok; ?></td>
                         <td><?= ucwords($penerbit); ?></td>
-                        <td>
-                           <a href="edit_buku.php?id=<?= $id; ?>" class="btn btn-sm btn-warning"><i class="bi bi-pencil-square"></i></a>
-                           <a href="delete_buku.php?id=<?= $id; ?>" class="btn btn-sm btn-danger" onclick=" return confirm_delete()"><i class="bi bi-trash"></i></a>
-                        </td>
                      </tr>
                      <?php endforeach; ?>
                   </tbody>
                </table>
-            </div>
-         </div>
-         <div class="row mt-5 text-end">
-            <div class="col-12 p-0">
-               <a href="kategori.php" class="btn btn-sm btn-outline-secondary">Data Kategori</a>
-               <a href="penerbit.php" class="btn btn-sm btn-outline-secondary ms-2">Data Penerbit</a>
             </div>
          </div>
       </div>
@@ -121,11 +102,6 @@ $result = mysqli_query($mysqli, $query);
    <!-- jquery -->
    <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
    
-   <script type="text/javascript">
-      function confirm_delete(){
-         return confirm("Anda yakin ingin menghapus data ini?");
-      }
-   </script>
 
 
    <!-- Optional JavaScript; choose one of the two! -->

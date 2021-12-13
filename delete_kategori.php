@@ -2,15 +2,15 @@
 
 require_once("connection.php");
 
-// Mendapatkan data Id buku
+// Mendapatkan data Id kategori
 if ( isset($_GET["id"]) ) $id = $_GET["id"];
 else {
-    echo " Id buku tidak ditemmukan! <a href=admin.php'>Kembali</a>";
+    echo " Id kategori tidak ditemmukan! <a href=kategori.php'>Kembali</a>";
     exit();
 }
 
-// Query Get Data buku
-$query = "DELETE FROM tb_buku WHERE id_buku = '{$id}'";
+// Query Get Data kategori
+$query = "DELETE FROM tb_kategori WHERE id_kategori = '{$id}'";
 
 // Eksekusi Query
 $result = mysqli_query($mysqli, $query);
@@ -21,7 +21,7 @@ if ( !$result ) {
 else{
    echo "
     <script>
-        window.location.href = 'admin.php';
+        window.location.href = 'kategori.php';
     </script>
     ";
 }

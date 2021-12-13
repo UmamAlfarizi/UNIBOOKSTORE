@@ -3,18 +3,6 @@
 // koneksi ke database
 require_once('connection.php');
 
-// mengambil data
-$query = "SELECT * FROM tb_buku JOIN tb_kategori ON tb_buku.id_kategori = tb_kategori.id_kategori JOIN tb_penerbit ON tb_buku.id_penerbit = tb_penerbit.id_penerbit";
-$result = mysqli_query($mysqli, $query);
-
-foreach( $result as $buku ) {
-   $kategori = $buku['nama_kategori'];
-   $nama = $buku['nama_buku'];
-   $harga = $buku['harga_buku'];
-   $stok = $buku['stok_buku'];
-   $penerbit = $buku['nama_penerbit'];
-}        
-
 ?>
 
 
@@ -32,61 +20,43 @@ foreach( $result as $buku ) {
    <!-- Bootsrap Icon -->
    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" />
 
-   <title>Tambah Buku</title>
+   <title>Tambah Penerbit Buku</title>
 </head>
 <body style="display: flex; height: 100vh; justify-content: center; align-items:center;">
    <div class="container">
       <div class="row justify-content-center">
          <div class="col-md-10 col-lg-8 shadow p-4">
-         <h3 class="modal-title text-center mb-4" id="exampleModalLabel">Tambah Buku</h3>
+         <h3 class="modal-title text-center mb-4" id="exampleModalLabel">Tambah Penerbit Buku</h3>
             <form action="" method="post">
                <div class="row mb-3">
-                  <label for="nama" class="col-3 text-end fw-bolder">Nama Buku</label>
+                  <label for="nama" class="col-3 text-end fw-bolder">Nama Penerbit</label>
                   <div class="col-9">
                      <input type="text" class="form-control" id="nama" name="nama" autocomplete="off" required>
                   </div>
                </div>
                <div class="row mb-3">
-                  <label for="kategori" class="col-3 text-end fw-bolder">Kategori Buku</label>
+                  <label for="alamat" class="col-3 text-end fw-bolder">Alamat Penerbit</label>
                   <div class="col-9">
-                     <?php $query = "SELECT * FROM tb_kategori"; $result = mysqli_query($mysqli, $query); ?>
-                     <select name="kategori" id="kategori" class="form-control" required>
-                        <option value="">-Pilih Kategori-</option>
-                        <?php foreach( $result as $kategori ) : ?>
-                        <option value="<?= $kategori['id_kategori']; ?>"><?= $kategori['nama_kategori']; ?></option>
-                        <?php endforeach; ?>
-                     </select>
+                     <input type="text" class="form-control" id="alamat" name="alamat" autocomplete="off" required>
                   </div>
                </div>
                <div class="row mb-3">
-                  <label for="harga" class="col-3 text-end fw-bolder">Harga Buku</label>
+                  <label for="kota" class="col-3 text-end fw-bolder">Kota Penerbit</label>
                   <div class="col-9">
-                     <input type="number" class="form-control" id="harga" name="harga" autocomplete="off" required>
+                     <input type="text" class="form-control" id="kota" name="kota" autocomplete="off" required>
                   </div>
                </div>
                <div class="row mb-3">
-                  <label for="stok" class="col-3 text-end fw-bolder">Stok Buku</label>
+                  <label for="telepon" class="col-3 text-end fw-bolder">Nomor Telepon</label>
                   <div class="col-9">
-                     <input type="number" class="form-control" id="stok" name="stok" autocomplete="off" required>
-                  </div>
-               </div>
-               <div class="row mb-3">
-                  <label for="penerbit" class="col-3 text-end fw-bolder">Penerbit Buku</label>
-                  <div class="col-9">
-                     <?php $query = "SELECT * FROM tb_penerbit"; $result = mysqli_query($mysqli, $query); ?>
-                     <select name="penerbit" id="penerbit" class="form-control" required>
-                        <option value="">-Pilih Penerbit-</option>
-                        <?php foreach( $result as $penerbit ) : ?>
-                        <option value="<?= $penerbit['id_penerbit']; ?>"><?= $penerbit['nama_penerbit']; ?></option>
-                        <?php endforeach; ?>
-                     </select>
+                     <input type="text" class="form-control" id="telepon" name="telepon" autocomplete="off" required>
                   </div>
                </div>
                <div class="row mt-4">
                   <div class="col-3"></div>
                   <div class="col-9">
                      <button type="submit" name="submit" class="btn btn-primary me-2">Tambah</button>
-                     <a class="btn border-primary text-primary" href="admin.php">Batal</a>
+                     <a class="btn border-primary text-primary" href="penerbit.php">Batal</a>
                   </div>
                </div>
             </form>
@@ -101,13 +71,12 @@ foreach( $result as $buku ) {
 
       if( isset($_POST['submit']) ) {
          $nama = $_POST['nama'];
-         $kategori = $_POST['kategori'];
-         $harga = $_POST['harga'];
-         $stok = $_POST['stok'];
-         $penerbit = $_POST['penerbit'];
+         $alamat = $_POST['alamat'];
+         $kota = $_POST['kota'];
+         $telepon = $_POST['telepon'];
 
 
-         $query = "INSERT INTO tb_buku (id_kategori, nama_buku, harga_buku, stok_buku, id_penerbit) VALUES ({$kategori}, '{$nama}', {$harga}, {$stok}, {$penerbit})";
+         $query = "INSERT INTO tb_penerbit (nama_penerbit, alamat_penerbit, kota_penerbit, telepon) VALUES ('{$nama}', '{$alamat}', '{$kota}', '{$telepon}')";
          $insert = mysqli_query($mysqli, $query);
 
          if( $insert == false ) {
@@ -121,7 +90,7 @@ foreach( $result as $buku ) {
             echo "
             <script>
                alert('Berhasil Menambahkan Data!');
-               window.location.href = 'admin.php';
+               window.location.href = 'penerbit.php';
             </script>
             ";
          }

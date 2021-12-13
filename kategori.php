@@ -4,7 +4,7 @@
 require_once('connection.php');
 
 // mengambil data
-$query = "SELECT * FROM tb_buku JOIN tb_kategori ON tb_buku.id_kategori = tb_kategori.id_kategori JOIN tb_penerbit ON tb_buku.id_penerbit = tb_penerbit.id_penerbit";
+$query = "SELECT * FROM tb_kategori";
 $result = mysqli_query($mysqli, $query);
 
 
@@ -24,7 +24,7 @@ $result = mysqli_query($mysqli, $query);
    <!-- Bootsrap Icon -->
    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" />
 
-   <title>Data Buku</title>
+   <title>Data Kategori Buku</title>
 </head>
 <body>
 
@@ -56,11 +56,11 @@ $result = mysqli_query($mysqli, $query);
    <section id="main" style="margin-top: 6rem;">
       <div class="container">
          <div class="row mb-4">
-            <h2 class="text-center">Data Buku</h2>
+            <h2 class="text-center">Data Kategori Buku</h2>
          </div>
          <div class="row mb-4">
             <div class="col p-0">
-               <a href="tambah_buku.php" class="btn btn-success"><i class="bi bi-file-plus"></i> Tambah Data</a>
+               <a href="tambah_kategori.php" class="btn btn-success"><i class="bi bi-file-plus"></i> Tambah Data</a>
             </div>
          </div>
          <div class="row">
@@ -69,35 +69,23 @@ $result = mysqli_query($mysqli, $query);
                   <thead>
                      <tr>
                         <th scope="col">#</th>
-                        <th scope="col">Kategori</th>
-                        <th scope="col">Nama Buku</th>
-                        <th scope="col">Harga (Rp)</th>
-                        <th scope="col">Stok</th>
-                        <th scope="col">Penerbit</th>
+                        <th scope="col">Nama Kategori</th>
                         <th scope="col">Aksi</th>
                      </tr>
                   </thead>
                   <tbody>
                      <?php 
                         $i = 1;
-                        foreach( $result as $buku ) :
-                           $id = $buku['id_buku'];
-                           $kategori = $buku['nama_kategori'];
-                           $nama = $buku['nama_buku'];
-                           $harga = $buku['harga_buku'];
-                           $stok = $buku['stok_buku'];
-                           $penerbit = $buku['nama_penerbit'];
+                        foreach( $result as $kategori ) :
+                           $id = $kategori['id_kategori'];
+                           $nama = $kategori['nama_kategori'];
                      ?>
                      <tr>
                         <th scope="row"><?= $i++; ?></th>
-                        <td><?= ucwords($kategori); ?></td>
                         <td><?= ucwords($nama); ?></td>
-                        <td><?= number_format($harga); ?></td>
-                        <td><?= $stok; ?></td>
-                        <td><?= ucwords($penerbit); ?></td>
                         <td>
-                           <a href="edit_buku.php?id=<?= $id; ?>" class="btn btn-sm btn-warning"><i class="bi bi-pencil-square"></i></a>
-                           <a href="delete_buku.php?id=<?= $id; ?>" class="btn btn-sm btn-danger" onclick=" return confirm_delete()"><i class="bi bi-trash"></i></a>
+                           <a href="edit_kategori.php?id=<?= $id; ?>" class="btn btn-sm btn-warning"><i class="bi bi-pencil-square"></i></a>
+                           <a href="delete_kategori.php?id=<?= $id; ?>" class="btn btn-sm btn-danger" onclick=" return confirm_delete()"><i class="bi bi-trash"></i></a>
                         </td>
                      </tr>
                      <?php endforeach; ?>
@@ -107,7 +95,7 @@ $result = mysqli_query($mysqli, $query);
          </div>
          <div class="row mt-5 text-end">
             <div class="col-12 p-0">
-               <a href="kategori.php" class="btn btn-sm btn-outline-secondary">Data Kategori</a>
+               <a href="admin.php" class="btn btn-sm btn-outline-secondary">Data Buku</a>
                <a href="penerbit.php" class="btn btn-sm btn-outline-secondary ms-2">Data Penerbit</a>
             </div>
          </div>
@@ -123,7 +111,7 @@ $result = mysqli_query($mysqli, $query);
    
    <script type="text/javascript">
       function confirm_delete(){
-         return confirm("Anda yakin ingin menghapus data ini?");
+         return confirm("Jika Anda Menghapus data ini maka semua buku yang berkategori ini ikut terhapus, Anda yakin?");
       }
    </script>
 

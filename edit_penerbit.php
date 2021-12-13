@@ -7,16 +7,15 @@ require_once('connection.php');
 $id = $_GET['id'];
 
 // mengambil data
-$query = "SELECT * FROM tb_buku JOIN tb_kategori ON tb_buku.id_kategori = tb_kategori.id_kategori JOIN tb_penerbit ON tb_buku.id_penerbit = tb_penerbit.id_penerbit WHERE id_buku = {$id}";
+$query = "SELECT * FROM tb_penerbit WHERE id_penerbit = {$id}";
 $result = mysqli_query($mysqli, $query);
 
-foreach( $result as $buku ) {
-   $ktg = $buku['nama_kategori'];
-   $nama = $buku['nama_buku'];
-   $harga = $buku['harga_buku'];
-   $stok = $buku['stok_buku'];
-   $pnrbt = $buku['nama_penerbit'];
-}        
+foreach( $result as $penerbit ) {
+   $nama = $penerbit['nama_penerbit'];
+   $alamat = $penerbit['alamat_penerbit'];
+   $kota = $penerbit['kota_penerbit'];
+   $telepon = $penerbit['telepon'];
+}    
 
 ?>
 
@@ -35,61 +34,43 @@ foreach( $result as $buku ) {
    <!-- Bootsrap Icon -->
    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" />
 
-   <title>Edit Buku</title>
+   <title>Edit Penerbit Buku</title>
 </head>
 <body style="display: flex; height: 100vh; justify-content: center; align-items:center;">
    <div class="container">
       <div class="row justify-content-center">
          <div class="col-md-10 col-lg-8 shadow p-4">
-         <h3 class="modal-title text-center mb-4" id="exampleModalLabel">Edit Buku</h3>
+         <h3 class="modal-title text-center mb-4" id="exampleModalLabel">Edit Penerbit Buku</h3>
             <form action="" method="post">
                <div class="row mb-3">
-                  <label for="nama" class="col-3 text-end fw-bolder">Nama Buku</label>
+                  <label for="nama" class="col-3 text-end fw-bolder">Nama Penerbit</label>
                   <div class="col-9">
                      <input type="text" class="form-control" id="nama" name="nama" autocomplete="off" required value="<?= $nama; ?>">
                   </div>
                </div>
                <div class="row mb-3">
-                  <label for="kategori" class="col-3 text-end fw-bolder">Kategori Buku</label>
+                  <label for="alamat" class="col-3 text-end fw-bolder">Alamat Penerbit</label>
                   <div class="col-9">
-                     <?php $query = "SELECT * FROM tb_kategori"; $result = mysqli_query($mysqli, $query); ?>
-                     <select name="kategori" id="kategori" class="form-control" required>
-                        <option>-Pilih Kategori-</option>
-                        <?php foreach( $result as $kategori ) : ?>
-                        <option <?= ($ktg == $kategori['nama_kategori'])? "selected" : "" ?> value="<?= $kategori['id_kategori']; ?>"><?= $kategori['nama_kategori']; ?></option>
-                        <?php endforeach; ?>
-                     </select>
+                     <input type="text" class="form-control" id="alamat" name="alamat" autocomplete="off" required value="<?= $alamat; ?>">
                   </div>
                </div>
                <div class="row mb-3">
-                  <label for="harga" class="col-3 text-end fw-bolder">Harga Buku</label>
+                  <label for="kota" class="col-3 text-end fw-bolder">Kota Penerbit</label>
                   <div class="col-9">
-                     <input type="number" class="form-control" id="harga" name="harga" autocomplete="off" required value="<?= $harga; ?>">
+                     <input type="text" class="form-control" id="kota" name="kota" autocomplete="off" required value="<?= $kota; ?>">
                   </div>
                </div>
                <div class="row mb-3">
-                  <label for="stok" class="col-3 text-end fw-bolder">Stok Buku</label>
+                  <label for="telepon" class="col-3 text-end fw-bolder">Nomor Telepon</label>
                   <div class="col-9">
-                     <input type="number" class="form-control" id="stok" name="stok" autocomplete="off" required value="<?= $stok; ?>">
-                  </div>
-               </div>
-               <div class="row mb-3">
-                  <label for="penerbit" class="col-3 text-end fw-bolder">Penerbit Buku</label>
-                  <div class="col-9">
-                     <?php $query = "SELECT * FROM tb_penerbit"; $result = mysqli_query($mysqli, $query); ?>
-                     <select name="penerbit" id="penerbit" class="form-control" required>
-                        <option>-Pilih Penerbit-</option>
-                        <?php foreach( $result as $penerbit ) : ?>
-                        <option <?= ($pnrbt == $penerbit['nama_penerbit'])? "selected" : "" ?> value="<?= $penerbit['id_penerbit']; ?>"><?= $penerbit['nama_penerbit']; ?></option>
-                        <?php endforeach; ?>
-                     </select>
+                     <input type="text" class="form-control" id="telepon" name="telepon" autocomplete="off" required value="<?= $telepon; ?>">
                   </div>
                </div>
                <div class="row mt-4">
                   <div class="col-3"></div>
                   <div class="col-9">
                      <button type="submit" name="submit" class="btn btn-primary me-2">Simpan</button>
-                     <a class="btn border-primary text-primary" href="admin.php">Batal</a>
+                     <a class="btn border-primary text-primary" href="penerbit.php">Batal</a>
                   </div>
                </div>
             </form>
@@ -102,13 +83,12 @@ foreach( $result as $buku ) {
 
       if( isset($_POST['submit']) ) {
          $nama = $_POST['nama'];
-         $kategori = $_POST['kategori'];
-         $harga = $_POST['harga'];
-         $stok = $_POST['stok'];
-         $penerbit = $_POST['penerbit'];
+         $alamat = $_POST['alamat'];
+         $kota = $_POST['kota'];
+         $telepon = $_POST['telepon'];
 
 
-         $query = "UPDATE tb_buku SET id_kategori = {$kategori}, nama_buku = '{$nama}', harga_buku = {$harga}, stok_buku = {$stok}, id_penerbit = {$penerbit} WHERE id_buku = {$id}";
+         $query = "UPDATE tb_penerbit SET nama_penerbit = '{$nama}', alamat_penerbit = '{$alamat}', kota_penerbit = '{$kota}', telepon = '{$telepon}' WHERE id_penerbit = {$id}";
          $update = mysqli_query($mysqli, $query);
 
          if( $update == false ) {
@@ -122,7 +102,7 @@ foreach( $result as $buku ) {
             echo "
             <script>
                alert('Berhasil Mengubah Data!');
-               window.location.href = 'admin.php';
+               window.location.href = 'penerbit.php';
             </script>
             ";
          }
