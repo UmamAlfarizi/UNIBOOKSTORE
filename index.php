@@ -69,6 +69,9 @@ $result = mysqli_query($mysqli, $query);
    <!-- MAIN -->
    <section id="main" style="margin: 7rem 0 5rem;">
       <div class="container">
+         <div class="row mb-4">
+            <h2 class="text-center">Daftar Buku</h2>
+         </div>
          <div class="row mb-5">
             <div class="col-lg-3 col-md-4 col-5">
                <form action="" method="post">
