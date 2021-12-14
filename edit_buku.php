@@ -7,7 +7,7 @@ require_once('connection.php');
 $id = $_GET['id'];
 
 // mengambil data
-$query = "SELECT * FROM tb_buku JOIN tb_kategori ON tb_buku.id_kategori = tb_kategori.id_kategori JOIN tb_penerbit ON tb_buku.id_penerbit = tb_penerbit.id_penerbit WHERE id_buku = {$id}";
+$query = "SELECT * FROM tb_buku JOIN tb_kategori ON tb_buku.id_kategori = tb_kategori.id_kategori JOIN tb_penerbit ON tb_buku.id_penerbit = tb_penerbit.id_penerbit WHERE id_buku = '{$id}'";
 $result = mysqli_query($mysqli, $query);
 
 foreach( $result as $buku ) {
@@ -43,6 +43,12 @@ foreach( $result as $buku ) {
          <div class="col-md-10 col-lg-8 shadow p-4">
          <h3 class="modal-title text-center mb-4" id="exampleModalLabel">Edit Buku</h3>
             <form action="" method="post">
+               <div class="row mb-3">
+                  <label for="id" class="col-3 text-end fw-bolder">ID Buku</label>
+                  <div class="col-9">
+                     <input type="text" class="form-control" id="id" name="id" autocomplete="off" readonly value="<?= $id; ?>">
+                  </div>
+               </div>
                <div class="row mb-3">
                   <label for="nama" class="col-3 text-end fw-bolder">Nama Buku</label>
                   <div class="col-9">
@@ -108,7 +114,7 @@ foreach( $result as $buku ) {
          $penerbit = $_POST['penerbit'];
 
 
-         $query = "UPDATE tb_buku SET id_kategori = {$kategori}, nama_buku = '{$nama}', harga_buku = {$harga}, stok_buku = {$stok}, id_penerbit = {$penerbit} WHERE id_buku = {$id}";
+         $query = "UPDATE tb_buku SET id_kategori = {$kategori}, nama_buku = '{$nama}', harga_buku = {$harga}, stok_buku = {$stok}, id_penerbit = '{$penerbit}' WHERE id_buku = '{$id}'";
          $update = mysqli_query($mysqli, $query);
 
          if( $update == false ) {

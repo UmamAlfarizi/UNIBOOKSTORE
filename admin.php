@@ -24,7 +24,7 @@ $result = mysqli_query($mysqli, $query);
    <!-- Bootsrap Icon -->
    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" />
 
-   <title>Data Buku</title>
+   <title>Admin</title>
 </head>
 <body>
 
@@ -68,7 +68,7 @@ $result = mysqli_query($mysqli, $query);
                <table class="table table-hover table-responsive">
                   <thead>
                      <tr>
-                        <th scope="col">#</th>
+                        <th scope="col">ID Buku</th>
                         <th scope="col">Kategori</th>
                         <th scope="col">Nama Buku</th>
                         <th scope="col">Harga (Rp)</th>
@@ -79,7 +79,6 @@ $result = mysqli_query($mysqli, $query);
                   </thead>
                   <tbody>
                      <?php 
-                        $i = 1;
                         foreach( $result as $buku ) :
                            $id = $buku['id_buku'];
                            $kategori = $buku['nama_kategori'];
@@ -89,15 +88,15 @@ $result = mysqli_query($mysqli, $query);
                            $penerbit = $buku['nama_penerbit'];
                      ?>
                      <tr>
-                        <th scope="row"><?= $i++; ?></th>
+                        <td scope="row"><?= $id; ?></td>
                         <td><?= ucwords($kategori); ?></td>
                         <td><?= ucwords($nama); ?></td>
                         <td><?= number_format($harga); ?></td>
                         <td><?= $stok; ?></td>
                         <td><?= ucwords($penerbit); ?></td>
                         <td>
-                           <a href="edit_buku.php?id=<?= $id; ?>" class="btn btn-sm btn-warning"><i class="bi bi-pencil-square"></i></a>
-                           <a href="delete_buku.php?id=<?= $id; ?>" class="btn btn-sm btn-danger" onclick=" return confirm_delete()"><i class="bi bi-trash"></i></a>
+                           <a href="edit_buku.php?id=<?= $id; ?>" class="btn btn-sm btn-warning my-1"><i class="bi bi-pencil-square"></i></a>
+                           <a href="delete_buku.php?id=<?= $id; ?>" class="btn btn-sm btn-danger my-1" onclick=" return confirm_delete()"><i class="bi bi-trash"></i></a>
                         </td>
                      </tr>
                      <?php endforeach; ?>
@@ -118,8 +117,6 @@ $result = mysqli_query($mysqli, $query);
 
 
 
-   <!-- jquery -->
-   <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
    
    <script type="text/javascript">
       function confirm_delete(){

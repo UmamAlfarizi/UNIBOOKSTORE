@@ -29,6 +29,12 @@ require_once('connection.php');
          <h3 class="modal-title text-center mb-4" id="exampleModalLabel">Tambah Penerbit Buku</h3>
             <form action="" method="post">
                <div class="row mb-3">
+                  <label for="id" class="col-3 text-end fw-bolder">ID Penerbit</label>
+                  <div class="col-9">
+                     <input type="text" class="form-control" id="id" name="id" autocomplete="off" required>
+                  </div>
+               </div>
+               <div class="row mb-3">
                   <label for="nama" class="col-3 text-end fw-bolder">Nama Penerbit</label>
                   <div class="col-9">
                      <input type="text" class="form-control" id="nama" name="nama" autocomplete="off" required>
@@ -70,13 +76,14 @@ require_once('connection.php');
       require_once('connection.php');
 
       if( isset($_POST['submit']) ) {
+         $id = $_POST['id'];
          $nama = $_POST['nama'];
          $alamat = $_POST['alamat'];
          $kota = $_POST['kota'];
          $telepon = $_POST['telepon'];
 
 
-         $query = "INSERT INTO tb_penerbit (nama_penerbit, alamat_penerbit, kota_penerbit, telepon) VALUES ('{$nama}', '{$alamat}', '{$kota}', '{$telepon}')";
+         $query = "INSERT INTO tb_penerbit (id_penerbit, nama_penerbit, alamat_penerbit, kota_penerbit, telepon) VALUES ('{$id}', '{$nama}', '{$alamat}', '{$kota}', '{$telepon}')";
          $insert = mysqli_query($mysqli, $query);
 
          if( $insert == false ) {

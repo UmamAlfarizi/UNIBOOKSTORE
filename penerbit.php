@@ -68,7 +68,7 @@ $result = mysqli_query($mysqli, $query);
                <table class="table table-hover table-responsive">
                   <thead>
                      <tr>
-                        <th scope="col">#</th>
+                        <th scope="col">ID Penerbit</th>
                         <th scope="col">Nama Penerbit</th>
                         <th scope="col">Alamat</th>
                         <th scope="col">Kota</th>
@@ -78,7 +78,6 @@ $result = mysqli_query($mysqli, $query);
                   </thead>
                   <tbody>
                      <?php 
-                        $i = 1;
                         foreach( $result as $penerbit ) :
                            $id = $penerbit['id_penerbit'];
                            $nama = $penerbit['nama_penerbit'];
@@ -87,14 +86,14 @@ $result = mysqli_query($mysqli, $query);
                            $telepon = $penerbit['telepon'];
                      ?>
                      <tr>
-                        <th scope="row"><?= $i++; ?></th>
+                        <td scope="row"><?= $id; ?></td>
                         <td><?= ucwords($nama); ?></td>
                         <td><?= ucwords($alamat); ?></td>
                         <td><?= ucwords($kota); ?></td>
                         <td><?= $telepon; ?></td>
                         <td>
-                           <a href="edit_penerbit.php?id=<?= $id; ?>" class="btn btn-sm btn-warning"><i class="bi bi-pencil-square"></i></a>
-                           <a href="delete_penerbit.php?id=<?= $id; ?>" class="btn btn-sm btn-danger" onclick=" return confirm_delete()"><i class="bi bi-trash"></i></a>
+                           <a href="edit_penerbit.php?id=<?= $id; ?>" class="btn btn-sm btn-warning my-1"><i class="bi bi-pencil-square"></i></a>
+                           <a href="delete_penerbit.php?id=<?= $id; ?>" class="btn btn-sm btn-danger my-1" onclick=" return confirm_delete()"><i class="bi bi-trash"></i></a>
                         </td>
                      </tr>
                      <?php endforeach; ?>

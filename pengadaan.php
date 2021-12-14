@@ -24,7 +24,7 @@ $result = mysqli_query($mysqli, $query);
    <!-- Bootsrap Icon -->
    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" />
 
-   <title>Data Buku</title>
+   <title>Pengadaan</title>
 </head>
 <body>
 
@@ -64,7 +64,7 @@ $result = mysqli_query($mysqli, $query);
                <table class="table table-hover table-responsive">
                   <thead>
                      <tr>
-                        <th scope="col">#</th>
+                        <th scope="col">No</th>
                         <th scope="col">Nama Buku</th>
                         <th scope="col">Stok</th>
                         <th scope="col">Penerbit</th>

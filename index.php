@@ -25,6 +25,19 @@ $result = mysqli_query($mysqli, $query);
    <!-- Bootsrap Icon -->
    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" />
 
+   <style>
+      .loader {
+         width: 150px;
+         position: absolute;
+         z-index: -1;
+         left: 27%; top: 12%;
+         display: none;
+      }
+      @media screen and (max-width: 1000px){
+         .loader {left: 40%};
+      }
+   </style>
+
    <title>UNIBOOKSTORE</title>
 </head>
 <body>
@@ -52,21 +65,18 @@ $result = mysqli_query($mysqli, $query);
       </div>
    </nav>
    <!-- /NAVBAR -->
-
+   <img src="loading.gif" class="loader">
    <!-- MAIN -->
    <section id="main" style="margin: 7rem 0 5rem;">
       <div class="container">
-         <div class="row justify-content-end mb-5">
-            <div class="col-6 col-lg-9 text-end">
-               Cari Buku :
-            </div>
-            <div class="col-6 col-lg-3">
-               <form>
-                  <input class="form-control" type="search" aria-label="Search">
+         <div class="row mb-5">
+            <div class="col-lg-3 col-md-4 col-5">
+               <form action="" method="post">
+                  <input id="keyword" name="keyword" class="form-control" type="text" aria-label="Search" autocomplete="off" placeholder="Cari buku..">
                </form>
             </div>
          </div>
-         <div class="row">
+         <div class="row" id="buku">
             <?php 
                foreach( $result as $buku ) :
                   $kategori = ucwords($buku['nama_kategori']);
@@ -76,7 +86,7 @@ $result = mysqli_query($mysqli, $query);
                   $penerbit = ucwords($buku['nama_penerbit']);
             ?>
                <div class="col-md-6 col-lg-4 mb-4">
-                  <div class="card shadow">
+                  <div class="card shadow-sm">
                      <div class="card-body">
                         <h5 class="card-title"><?= $nama; ?></h5>
                         <h6 class="card-subtitle mt-1 mb-4">Rp <?= number_format($harga); ?></h6> 
@@ -93,6 +103,28 @@ $result = mysqli_query($mysqli, $query);
    </section>
    <!-- /MAIN -->
 
+
+   <!-- jquery -->
+   <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
+
+   <script>
+      $(document).ready(function() {
+         $('#keyword').on('keyup', function() {
+            $('.loader').show();
+
+            // ajaxload
+            // $('#buku').load('buku.php?keyword=' + $('#keyword').val());
+
+            // $.get
+            $.get('buku.php?keyword=' + $('#keyword').val(), function(data) {
+               $('#buku').html(data);
+               $('.loader').hide();
+
+
+            })
+         })
+      });
+   </script>
 
 
 

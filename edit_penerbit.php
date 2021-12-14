@@ -7,7 +7,7 @@ require_once('connection.php');
 $id = $_GET['id'];
 
 // mengambil data
-$query = "SELECT * FROM tb_penerbit WHERE id_penerbit = {$id}";
+$query = "SELECT * FROM tb_penerbit WHERE id_penerbit = '{$id}'";
 $result = mysqli_query($mysqli, $query);
 
 foreach( $result as $penerbit ) {
@@ -42,6 +42,12 @@ foreach( $result as $penerbit ) {
          <div class="col-md-10 col-lg-8 shadow p-4">
          <h3 class="modal-title text-center mb-4" id="exampleModalLabel">Edit Penerbit Buku</h3>
             <form action="" method="post">
+               <div class="row mb-3">
+                  <label for="id" class="col-3 text-end fw-bolder">ID Penerbit</label>
+                  <div class="col-9">
+                     <input type="text" class="form-control" id="id" name="id" autocomplete="off" readonly value="<?= $id; ?>">
+                  </div>
+               </div>
                <div class="row mb-3">
                   <label for="nama" class="col-3 text-end fw-bolder">Nama Penerbit</label>
                   <div class="col-9">
@@ -88,7 +94,7 @@ foreach( $result as $penerbit ) {
          $telepon = $_POST['telepon'];
 
 
-         $query = "UPDATE tb_penerbit SET nama_penerbit = '{$nama}', alamat_penerbit = '{$alamat}', kota_penerbit = '{$kota}', telepon = '{$telepon}' WHERE id_penerbit = {$id}";
+         $query = "UPDATE tb_penerbit SET nama_penerbit = '{$nama}', alamat_penerbit = '{$alamat}', kota_penerbit = '{$kota}', telepon = '{$telepon}' WHERE id_penerbit = '{$id}'";
          $update = mysqli_query($mysqli, $query);
 
          if( $update == false ) {

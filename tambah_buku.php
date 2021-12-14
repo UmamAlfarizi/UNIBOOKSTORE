@@ -41,6 +41,12 @@ foreach( $result as $buku ) {
          <h3 class="modal-title text-center mb-4" id="exampleModalLabel">Tambah Buku</h3>
             <form action="" method="post">
                <div class="row mb-3">
+                  <label for="id" class="col-3 text-end fw-bolder">ID Buku</label>
+                  <div class="col-9">
+                     <input type="text" class="form-control" id="id" name="id" autocomplete="off" required>
+                  </div>
+               </div>
+               <div class="row mb-3">
                   <label for="nama" class="col-3 text-end fw-bolder">Nama Buku</label>
                   <div class="col-9">
                      <input type="text" class="form-control" id="nama" name="nama" autocomplete="off" required>
@@ -100,6 +106,7 @@ foreach( $result as $buku ) {
       require_once('connection.php');
 
       if( isset($_POST['submit']) ) {
+         $id = $_POST['id'];
          $nama = $_POST['nama'];
          $kategori = $_POST['kategori'];
          $harga = $_POST['harga'];
@@ -107,7 +114,7 @@ foreach( $result as $buku ) {
          $penerbit = $_POST['penerbit'];
 
 
-         $query = "INSERT INTO tb_buku (id_kategori, nama_buku, harga_buku, stok_buku, id_penerbit) VALUES ({$kategori}, '{$nama}', {$harga}, {$stok}, {$penerbit})";
+         $query = "INSERT INTO tb_buku (id_buku, id_kategori, nama_buku, harga_buku, stok_buku, id_penerbit) VALUES ('{$id}', {$kategori}, '{$nama}', {$harga}, {$stok}, '{$penerbit}')";
          $insert = mysqli_query($mysqli, $query);
 
          if( $insert == false ) {

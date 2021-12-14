@@ -68,7 +68,7 @@ $result = mysqli_query($mysqli, $query);
                <table class="table table-hover table-responsive">
                   <thead>
                      <tr>
-                        <th scope="col">#</th>
+                        <th scope="col">No.</th>
                         <th scope="col">Nama Kategori</th>
                         <th scope="col">Aksi</th>
                      </tr>
@@ -84,8 +84,8 @@ $result = mysqli_query($mysqli, $query);
                         <th scope="row"><?= $i++; ?></th>
                         <td><?= ucwords($nama); ?></td>
                         <td>
-                           <a href="edit_kategori.php?id=<?= $id; ?>" class="btn btn-sm btn-warning"><i class="bi bi-pencil-square"></i></a>
-                           <a href="delete_kategori.php?id=<?= $id; ?>" class="btn btn-sm btn-danger" onclick=" return confirm_delete()"><i class="bi bi-trash"></i></a>
+                           <a href="edit_kategori.php?id=<?= $id; ?>" class="btn btn-sm btn-warning my-1"><i class="bi bi-pencil-square"></i></a>
+                           <a href="delete_kategori.php?id=<?= $id; ?>" class="btn btn-sm btn-danger my-1" onclick=" return confirm_delete()"><i class="bi bi-trash"></i></a>
                         </td>
                      </tr>
                      <?php endforeach; ?>
