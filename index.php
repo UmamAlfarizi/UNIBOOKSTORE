@@ -30,7 +30,7 @@ $result = mysqli_query($mysqli, $query);
          width: 150px;
          position: absolute;
          z-index: -1;
-         left: 27%; top: 12%;
+         left: 27%; top: 22%;
          display: none;
       }
       @media screen and (max-width: 1000px){
